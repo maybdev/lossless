@@ -5,8 +5,7 @@ map = {char:index for index,char in enumerate(chars)}
 def toint(s:str)->int:
     n=-1
     for char in reversed(s):
-        remainder=map[char]
-        n=(n+1)*base+remainder
+        n=(n+1)*base+map[char]
     return n
 
 def tostr(n:int)->str:
