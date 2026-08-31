@@ -1,6 +1,6 @@
-chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ \n'
-base = len(chars)
-map = {char:index for index,char in enumerate(chars)}
+chars='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ \n'
+base=len(chars)
+map={char:index for index,char in enumerate(chars)}
 
 def toint(s:str)->int:
     n=-1
