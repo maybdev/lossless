@@ -1,0 +1,65 @@
+<input id="inp" type="text" oninput="packed=pack(toint(document.getElementById('inp').value));document.getElementById('packed').textContent=[...packed].map(b=>b.toString(16).padStart(2,'0')).join(' ');document.getElementById('length').textContent=`Compressed length: ${packed.length}`;document.getElementById('saved').textContent=`Saved: ${document.getElementById('inp').value.length-packed.length} characters`">
+<p id="packed"></p>
+<p id="length"></p>
+<p id="saved"></p>
+
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+        margin: 0;
+    }
+
+    input {
+        width: 75vw;
+        text-align: center;
+    }
+</style>
+
+<script>
+    const chars='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ \n';
+    const base=BigInt(chars.length);
+    const map=new Map([...chars].map((char,index)=>[char,BigInt(index)]));
+
+    function toint(s) {
+        let n=-1n;
+        for (const char of [...s].reverse()) {
+            n=(n+1n)*base+map.get(char);
+        }
+        return n;
+    }
+
+    function tostr(n) {
+        const string=[];
+        while (n>=0n) {
+            const remainder=n%base;
+            n=n/base;
+            string.push(chars[Number(remainder)]);
+            n-=1n;
+        }
+        return string.join('');
+    }
+
+    function pack(n) {
+        const bitlen=n.toString(2).length;
+        const bytelen=(bitlen+7)>>3;
+        const bytes=new Uint8Array(bytelen);
+        for (let i=bytelen-1;i>=0;i--) {
+            bytes[i]=Number(n&0xffn);
+            n>>=8n;
+        }
+        return bytes;
+    }
+
+    function unpack(b) {
+        let n=0n;
+        for (const byte of b) {
+            n=(n<<8n)|BigInt(byte);
+        }
+        return n;
+    }
+</script>
