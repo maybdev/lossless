@@ -1,4 +1,4 @@
-<input id="inp" type="text" oninput="packed=pack(toint(document.getElementById('inp').value));document.getElementById('packed').textContent=[...packed].map(b=>b.toString(16).padStart(2,'0')).join(' ');document.getElementById('length').textContent=`Compressed length: ${packed.length}`;document.getElementById('saved').textContent=`Saved: ${document.getElementById('inp').value.length-packed.length} characters`">
+<input id="inp" type="text" oninput="packed=pack(toint(document.getElementById('inp').value));document.getElementById('packed').textContent=[...packed].map(b=>b.toString(16).padStart(2,'0')).join(' ');document.getElementById('length').textContent=`Compressed length: ${packed.length} characters`;document.getElementById('saved').textContent=`Saved: ${document.getElementById('inp').value.length-packed.length} characters`">
 <p id="packed"></p>
 <p id="length"></p>
 <p id="saved"></p>
